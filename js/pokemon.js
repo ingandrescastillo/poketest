@@ -1,46 +1,70 @@
+//Variables de iniciar juego
+const sectionseleccionarataque = document.getElementById('seleccionar-ataque')
+const sectionreset = document.getElementById('reiniciar')
+const botonMascota = document.getElementById('boton-pokemon')
+const botonagua = document.getElementById('boton-agua')
+const botonfuego = document.getElementById('boton-fuego')
+const botonplanta = document.getElementById('boton-planta')
+const botontierra = document.getElementById('boton-tierra')
+const botonreiniciar = document.getElementById('boton-reiniciar')
+
+//Variables Seleccionar Mascota
+
+const sectionseleccionarpokemon = document.getElementById('seleccionar-pokemon')
+const pokemon1 = document.getElementById('Alain')
+const pokemon2 = document.getElementById('Roy')
+const pokemon3 = document.getElementById('Cynthia')
+const pokemon4 = document.getElementById('Lionel')
+const pokemon5 = document.getElementById('Dianta')
+const pokemon6 = document.getElementById('Steven')
+const spanpokemon= document.getElementById('mascota-jugador')
+
+// Variables Seleccionar Mascota Rival
+const spanpokemonrival = document.getElementById('mascota-rival')
+
+//Variables de Combate
+const spanvidajugador = document.getElementById('vidas-jugador')
+const spanvidasrival = document.getElementById('vidas-rival')
+
+//Variables Crear Mensaje
+const sectionmensajes = document.getElementById('resultado')
+const ataquesdeljugador = document.getElementById('ataques-jugador')
+const ataquesdelrival = document.getElementById('ataques-rival')
+
+//Variables Crear Mensaje Final
+
+/* Estas variables se eliminan porque ya existen en la parte superior
+const sectionmensajes = document.getElementById('resultado')
+const sectionreset = document.getElementById('reiniciar')
+const botonMascota = document.getElementById('boton-pokemon')
+const botonagua = document.getElementById('boton-agua')
+const botonfuego = document.getElementById('boton-fuego')
+const botonplanta = document.getElementById('boton-planta')
+const botontierra = document.getElementById('boton-tierra')*/
+
 let ataquejugador
 let ataquerival
 let vidasjugador = 6
 let vidasrival = 6
 
 function iniciarjuego(){
-    let sectionseleccionarataque = document.getElementById('seleccionar-ataque')
+    
     sectionseleccionarataque.style.display = 'none'
-    let sectionreset = document.getElementById('reiniciar')
     sectionreset.style.display = 'none'
 
-    let botonMascota = document.getElementById('boton-pokemon')
-        botonMascota.addEventListener('click', seleccionarmascota)
-    let botonagua = document.getElementById('boton-agua')
-        botonagua.addEventListener('click',ataqueagua)
-    let botonfuego = document.getElementById('boton-fuego')
-        botonfuego.addEventListener('click',ataquefuego)
-    let botonplanta = document.getElementById('boton-planta')
-        botonplanta.addEventListener('click',ataqueplanta)
-    let botontierra = document.getElementById('boton-tierra')
-        botontierra.addEventListener('click',ataquetierra)
+    botonMascota.addEventListener('click', seleccionarmascota)
+    botonagua.addEventListener('click',ataqueagua)
+    botonfuego.addEventListener('click',ataquefuego)
+    botonplanta.addEventListener('click',ataqueplanta)
+    botontierra.addEventListener('click',ataquetierra)
 
-    let botonreiniciar = document.getElementById('boton-reiniciar')
-        botonreiniciar.addEventListener('click', resetjuego)
+    botonreiniciar.addEventListener('click', resetjuego)
 }
 
 function seleccionarmascota(){
-    let sectionseleccionarpokemon = document.getElementById('seleccionar-pokemon')
-    sectionseleccionarpokemon.style.display = 'none'
-
-    let sectionseleccionarataque = document.getElementById('seleccionar-ataque')
-    sectionseleccionarataque.style.display = 'flex'
-
-
-    let pokemon1 = document.getElementById('Alain')
-    let pokemon2 = document.getElementById('Roy')
-    let pokemon3 = document.getElementById('Cynthia')
-    let pokemon4 = document.getElementById('Lionel')
-    let pokemon5 = document.getElementById('Dianta')
-    let pokemon6 = document.getElementById('Steven')
-    let spanpokemon= document.getElementById('mascota-jugador')
     
-
+    sectionseleccionarpokemon.style.display = 'none'
+    sectionseleccionarataque.style.display = 'flex'
 
     if(pokemon1.checked) {
         spanpokemon.innerHTML = 'Alain'
@@ -63,7 +87,7 @@ function seleccionarmascota(){
 
 function seleccionarmascotarival(){
     let pokemonaleatorio = aleatorio(1,6)
-    let spanpokemonrival = document.getElementById('mascota-rival')
+    
 
     if (pokemonaleatorio == 1){
         spanpokemonrival.innerHTML = 'Alain'
@@ -118,8 +142,7 @@ function ataquealeatoriorival(){
 }
 
 function combate(){
-    let spanvidajugador = document.getElementById('vidas-jugador')
-    let spanvidasrival = document.getElementById('vidas-rival')
+    
 
     if(ataquerival == ataquejugador){
         crearmensaje('Empate')
@@ -149,9 +172,6 @@ function revisarvidas(){
 }
 
 function crearmensaje(resultado){
-    let sectionmensajes = document.getElementById('resultado')
-    let ataquesdeljugador = document.getElementById('ataques-jugador')
-    let ataquesdelrival = document.getElementById('ataques-rival')
     
     let nuevoataquejugador = document.createElement('p')
     let nuevoataquerival = document.createElement('p')
@@ -168,23 +188,14 @@ function crearmensaje(resultado){
 }
 
 function crearmensajefinal(resultadofinal){
-    let sectionmensajes = document.getElementById('resultado')
 
     sectionmensajes.innerHTML = resultadofinal
-
-    let sectionreset = document.getElementById('reiniciar')
     sectionreset.style.display = 'block'
-
-    let botonMascota = document.getElementById('boton-pokemon')
-        botonMascota.disabled = true
-    let botonagua = document.getElementById('boton-agua')
-        botonagua.disabled = true
-    let botonfuego = document.getElementById('boton-fuego')
-        botonfuego.disabled = true
-    let botonplanta = document.getElementById('boton-planta')
-        botonplanta.disabled = true
-    let botontierra = document.getElementById('boton-tierra')
-        botontierra.disabled = true
+    botonMascota.disabled = true
+    botonagua.disabled = true
+    botonfuego.disabled = true
+    botonplanta.disabled = true
+    botontierra.disabled = true
 }
 
 function resetjuego(){
