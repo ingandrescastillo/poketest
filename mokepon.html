@@ -1,0 +1,96 @@
+<html class="fondo">
+    <head>
+        <meta charset="utf-8" />
+        <title>POKEMON Batte!</title>
+        <script src="./js/pokemon.js"></script>
+        <link rel="stylesheet" href="./Front.css">
+    </head>
+    <body>
+        <section id="seleccionar-pokemon">
+            <h1 id = "titulo" class = "titulos">Pokémon Match!</h1>
+            <h2 class = 'subtitulo'>Elige tu personaje:</h2>
+
+            <div class = 'personajess'>
+                <input type="radio" name = "mascota" id="Alain">
+                <label class = 'tarjeta-personaje' for = "Alain">
+                    <p>Alain</p>
+                    <img src="./Personajes/Alain.png" alt="Alain">
+                </label>
+                    
+    
+                <input type="radio" name = "mascota" id="Roy">
+                <label class = 'tarjeta-personaje' for = "Roy">
+                    <p>Roy</p>
+                    <img src="./Personajes/Roy.png" alt="Roy">
+                </label> 
+    
+                <input type="radio" name = "mascota" id="Cynthia">
+                <label class = 'tarjeta-personaje' for = "Cynthia">
+                    <p>Cynthia</p>
+                    <img src="./Personajes/Cynthia.png" alt="Cynthia">
+
+                </label> 
+    
+                <input type="radio" name = "mascota" id="Lionel">
+                <label class = 'tarjeta-personaje' for = "Lionel">
+                    <p>Lionel</p>
+                    <img src="./Personajes/Lionel.png" alt="Lionel">
+                </label> 
+             
+                <input type="radio" name = "mascota" id="Dianta">
+                <label class = 'tarjeta-personaje' for = "Dianta">
+                    <p>Dianta</p>
+                    <img src="./Personajes/Dianta.png" alt="Dianta">
+                </label> 
+    
+                <input type="radio" name = "mascota" id="Steven">
+                <label class = 'tarjeta-personaje' for = "Steven">
+                    <p>Steven</p>
+                    <img src="./Personajes/Steven.png" alt="Steven">
+                </label> 
+               
+    
+
+            </div>
+
+            <button id = "boton-pokemon" class="boton-select">Seleccionar</button>
+        
+        </section>
+
+
+        <section id="seleccionar-ataque">
+            <h1 id = "titulo" class = "titulos">🤜🏼 Pokémon Battle! 🤛🏽</h1>
+
+            <h2>Elige un tipo de Pokémon:</h2>
+
+            <div class="tarjetas-ataques">
+                <button id= "boton-agua" class="boton-ataque"> Agua 💧</button>
+                <button id= "boton-fuego" class="boton-ataque"> Fuego 🔥</button>
+                <button id= "boton-planta" class="boton-ataque"> Planta 🌿</button>
+                <button id= "boton-tierra" class="boton-ataque"> Tierra 🌎</button>
+            </div>
+                <div id="mensajes">
+                    <p id="resultado">🌟EMPIEZA LA BATALLA!🌟</p>
+
+                    <section id="reiniciar">
+                        <button id="boton-reiniciar">Nueva Batalla</button>
+                    </section>  
+                </div>
+
+            <div class="ataques">
+                <div class="ataquesdeljugador">
+                    <p id = "vidas-jugador">6</p>
+                    <p id="mascota-jugador"></p> 
+                    <div id="ataques-jugador"></div>
+                </div>
+                
+
+                <div class="ataquesdelrival">
+                    <p id = "vidas-rival">6</p>
+                    <p id="mascota-rival"></p> 
+                    <div id="ataques-rival"></div>
+                </div>                
+            </div>
+        </section>
+    </body>
+</html>
