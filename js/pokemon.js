@@ -30,6 +30,7 @@ const spanvidasrival = document.getElementById('vidas-rival')
 const sectionmensajes = document.getElementById('resultado')
 const ataquesdeljugador = document.getElementById('ataques-jugador')
 const ataquesdelrival = document.getElementById('ataques-rival')
+const contenedortarjetas = document.getElementById('contenedortarjetas')
 
 //Variables Crear Mensaje Final
 
@@ -42,15 +43,90 @@ const botonfuego = document.getElementById('boton-fuego')
 const botonplanta = document.getElementById('boton-planta')
 const botontierra = document.getElementById('boton-tierra')*/
 
+let personajes = [] //adentro de corchete cuadrado entra los objetos que ya contruimos de la clase personajes
 let ataquejugador
 let ataquerival
+let opciondepersonaje
 let vidasjugador = 6
 let vidasrival = 6
+
+class Personajes{
+    constructor(nombre, foto, vida){
+        this.nombre = nombre
+        this.foto = foto
+        this.vida = vida
+        this.ataques =  []
+    }
+}
+
+let Alain = new Personajes('Alain','./Personajes/Alain.png',5)
+let Roy = new Personajes('Roy','./Personajes/Roy.png',5)
+let Cynthia = new Personajes('Cynthia','./Personajes/Cynthia.png',5)
+let Lionel = new Personajes('Lionel','./Personajes/Lionel.png',5)
+let Dianta = new Personajes('Dianta','./Personajes/Dianta.png',5)
+let Steven = new Personajes('Steven','./Personajes/Steven.png',5)
+
+Alain.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+Roy.ataques.push(
+    {nombre: '🌿', id: 'boton-planta'},
+    {nombre: '🌿', id: 'boton-planta'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+Cynthia.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+Lionel.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌿', id: 'boton-planta'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+Dianta.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🔥', id: 'boton-fuego'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+Steven.ataques.push(
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌿', id: 'boton-planta'},
+    {nombre: '💧', id: 'boton-agua'},
+    {nombre: '🌎', id: 'boton-tierra'},
+)
+
+personajes.push(Alain,Roy,Cynthia,Lionel,Dianta,Steven)
+
+// console.log se usa para mapear errores, entre paréntesis se pone lo que queremos ver
+console.log(personajes)
 
 function iniciarjuego(){
     
     sectionseleccionarataque.style.display = 'none'
     sectionreset.style.display = 'none'
+
+    personajes.forEach((personaje) =>{
+        opciondepersonaje = `<input type="radio" name = "mascota" id=${personaje.nombre}>
+        <label class = 'tarjeta-personaje' for = ${personaje.nombre}>
+            <p>${personaje.nombre}</p>
+            <img src=${personaje.foto} alt=${personaje.nombre}>
+        </label>`
+    //el + permite agregar todos los personajes que yo tenga
+    contenedortarjetas.innerHTML += opciondepersonaje
+    })
 
     botonMascota.addEventListener('click', seleccionarmascota)
     botonagua.addEventListener('click',ataqueagua)
