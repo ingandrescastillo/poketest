@@ -11,12 +11,6 @@ const botonreiniciar = document.getElementById('boton-reiniciar')
 //Variables Seleccionar Mascota
 
 const sectionseleccionarpokemon = document.getElementById('seleccionar-pokemon')
-const pokemon1 = document.getElementById('Alain')
-const pokemon2 = document.getElementById('Roy')
-const pokemon3 = document.getElementById('Cynthia')
-const pokemon4 = document.getElementById('Lionel')
-const pokemon5 = document.getElementById('Dianta')
-const pokemon6 = document.getElementById('Steven')
 const spanpokemon= document.getElementById('mascota-jugador')
 
 // Variables Seleccionar Mascota Rival
@@ -47,6 +41,12 @@ let personajes = [] //adentro de corchete cuadrado entra los objetos que ya cont
 let ataquejugador
 let ataquerival
 let opciondepersonaje
+let inputalain
+let inputroy
+let inputcynthia
+let inputlionel
+let inputdianta
+let inputsteven
 let vidasjugador = 6
 let vidasrival = 6
 
@@ -126,6 +126,13 @@ function iniciarjuego(){
         </label>`
     //el + permite agregar todos los personajes que yo tenga
     contenedortarjetas.innerHTML += opciondepersonaje
+
+        inputalain = document.getElementById('Alain')
+        inputroy = document.getElementById('Roy')
+        inputcynthia = document.getElementById('Cynthia')
+        inputlionel = document.getElementById('Lionel')
+        inputdianta = document.getElementById('Dianta')
+        inputsteven = document.getElementById('Steven')
     })
 
     botonMascota.addEventListener('click', seleccionarmascota)
@@ -142,18 +149,18 @@ function seleccionarmascota(){
     sectionseleccionarpokemon.style.display = 'none'
     sectionseleccionarataque.style.display = 'flex'
 
-    if(pokemon1.checked) {
-        spanpokemon.innerHTML = 'Alain'
-    } else if (pokemon2.checked){
-        spanpokemon.innerHTML = 'Roy'
-    } else if (pokemon3.checked){
-        spanpokemon.innerHTML = 'Cynthia'
-    } else if (pokemon4.checked){
-        spanpokemon.innerHTML = 'Lionel'
-    } else if (pokemon5.checked){
-        spanpokemon.innerHTML = 'Dianta'
-    } else if (pokemon6.checked){
-        spanpokemon.innerHTML = 'Steven'
+    if(inputalain.checked) {
+        spanpokemon.innerHTML = inputalain.id
+    } else if (inputroy.checked){
+        spanpokemon.innerHTML = inputroy.id
+    } else if (inputcynthia.checked){
+        spanpokemon.innerHTML = inputcynthia.id
+    } else if (inputlionel.checked){
+        spanpokemon.innerHTML = inputlionel.id
+    } else if (inputdianta.checked){
+        spanpokemon.innerHTML = inputdianta.id
+    } else if (inputsteven.checked){
+        spanpokemon.innerHTML = inputsteven.id
     } else {
         alert('Selecciona un Pokémon valido')
     }
