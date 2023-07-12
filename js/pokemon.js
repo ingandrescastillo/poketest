@@ -13,6 +13,7 @@ const botonreiniciar = document.getElementById('boton-reiniciar')
 const sectionseleccionarpokemon = document.getElementById('seleccionar-pokemon')
 const spanpokemon= document.getElementById('mascota-jugador')
 
+
 // Variables Seleccionar Mascota Rival
 const spanpokemonrival = document.getElementById('mascota-rival')
 
@@ -47,6 +48,7 @@ let inputcynthia
 let inputlionel
 let inputdianta
 let inputsteven
+let pokemonjugador
 let vidasjugador = 6
 let vidasrival = 6
 
@@ -151,41 +153,48 @@ function seleccionarmascota(){
 
     if(inputalain.checked) {
         spanpokemon.innerHTML = inputalain.id
+        pokemonjugador = inputalain.id
     } else if (inputroy.checked){
         spanpokemon.innerHTML = inputroy.id
+        pokemonjugador = inputroy.id
     } else if (inputcynthia.checked){
         spanpokemon.innerHTML = inputcynthia.id
+        pokemonjugador = inputcynthia.id
     } else if (inputlionel.checked){
         spanpokemon.innerHTML = inputlionel.id
+        pokemonjugador = inputlionel.id
     } else if (inputdianta.checked){
         spanpokemon.innerHTML = inputdianta.id
+        pokemonjugador = inputdianta.id
     } else if (inputsteven.checked){
         spanpokemon.innerHTML = inputsteven.id
+        pokemonjugador = inputsteven.id
     } else {
         alert('Selecciona un Pokémon valido')
     }
 
+    extraerAtaques(pokemonjugador)
     seleccionarmascotarival()
 }
 
-function seleccionarmascotarival(){
-    let pokemonaleatorio = aleatorio(1,6)
+function extraerAtaques(pokemonjugador){
+    let ataques
+    for (let i = 0; i < personajes.length; i++){
+        if(pokemonjugador === personajes[i].nombre){
+            ataques = personajes[i].ataques
+        }
+    }    
     
+    //mostrarataques(ataques)
+}
 
-    if (pokemonaleatorio == 1){
-        spanpokemonrival.innerHTML = 'Alain'
-    } else if(pokemonaleatorio == 2){
-        spanpokemonrival.innerHTML = 'Roy'
-    } else if(pokemonaleatorio == 3){
-        spanpokemonrival.innerHTML = 'Cynthia'
-    } else if(pokemonaleatorio == 4){
-        spanpokemonrival.innerHTML = 'Lionel'
-    } else if(pokemonaleatorio == 5){
-        spanpokemonrival.innerHTML = 'Dianta'
-    } else if(pokemonaleatorio == 6){
-        spanpokemonrival.innerHTML = 'Steven'
-    }
-    }
+function seleccionarmascotarival(){
+    let pokemonaleatorio = aleatorio(0,personajes.length -1)
+    
+    spanpokemonrival.innerHTML = personajes[pokemonaleatorio].nombre
+
+
+}
 
 function ataqueagua(){
         ataquejugador = 'Agua'
