@@ -38,7 +38,7 @@
 
     let personajes = [] //adentro de corchete cuadrado entra los objetos que ya contruimos de la clase personajes
     let ataquejugador = []
-    let ataquerival
+    let ataquerival = []
     let opciondepersonaje
     let inputalain
     let inputroy
@@ -48,11 +48,16 @@
     let inputsteven
     let pokemonjugador
     let ataquesPokemon
+    let ataquesPokemonEnemigo
     let botonagua
     let botonfuego
     let botonplanta
     let botontierra
     let botones = []
+    let indexataquejugador
+    let indexataquerival
+    let victoriasjugador = 0
+    let victoriasrival = 0
     let vidasjugador = 6
     let vidasrival = 6
 
@@ -212,20 +217,21 @@
                 if(e.target.textContent === '🔥'){
                     ataquejugador.push('Fuego')
                     console.log(ataquejugador)
-                    boton.style.background = '#112f58'
+                    boton.disabled = true
                 } else if (e.target.textContent === '💧') {
                     ataquejugador.push('Agua')
                     console.log(ataquejugador)
-                    boton.style.background = '#112f58'
+                    boton.disabled = true
                 } else if (e.target.textContent === '🌿') {
                     ataquejugador.push('Planta')
                     console.log(ataquejugador)
-                    boton.style.background = '#112f58'
+                    boton.disabled = true
                 } else {
                     ataquejugador.push('Tierra')
                     console.log(ataquejugador)
-                    boton.style.background = '#112f58'
+                    boton.disabled = true
                 }
+                ataquealeatoriorival()
             }) 
         })
     }
@@ -234,55 +240,78 @@
         let pokemonaleatorio = aleatorio(0,personajes.length -1)
         
         spanpokemonrival.innerHTML = personajes[pokemonaleatorio].nombre
+        ataquesPokemonEnemigo = personajes[pokemonaleatorio].ataques
         secuenciaAtaque()
 
     }
 
 
     function ataquealeatoriorival(){
-        let ataquealeatorio = aleatorio(1,4)
+        let ataquealeatorio = aleatorio(0,ataquesPokemonEnemigo.length -1)
         
-        if (ataquealeatorio == 1){
-            ataquerival = 'Agua'   
+
+        //PILAS ARREGLAR ESTE CASO PORQUE NO ES TAN ALEATORIO COMO SE ESPERA
+        if (ataquealeatorio == 0){
+            ataquerival.push('Agua')   
+        } else if(ataquealeatorio == 1){
+            ataquerival.push('Fuego')
         } else if(ataquealeatorio == 2){
-            ataquerival = 'Fuego'
+            ataquerival.push('Planta')
         } else if(ataquealeatorio == 3){
-            ataquerival = 'Planta'
-        } else if(ataquealeatorio == 4){
-            ataquerival = 'Tierra'
+            ataquerival.push('Tierra')
         }
+        console.log(ataquerival)
+        iniciarcombate()
+        //combate()
 
-        combate()
+    }
+//ESTA FUNCION REVISAR, el 4 es la cantidad de ataques
 
+    function iniciarcombate(){
+        if(ataquejugador.length === 4){
+                combate()
+
+        }
+    }
+
+    function indexambosoponentes(jugador,rival){
+            indexataquejugador = ataquejugador[jugador]
+            indexataquerival = ataquerival[rival]
     }
 
     function combate(){
-        
 
-        if(ataquerival == ataquejugador){
-            crearmensaje('Empate')
-        } else if( ataquejugador == 'Agua' && (ataquerival == 'Fuego' || ataquerival == 'Tierra') 
-                || ataquejugador == 'Fuego'&& ataquerival == 'Planta'
-                || ataquejugador == 'Planta' && (ataquerival == 'Agua' || ataquerival == 'Tierra')
-                || ataquejugador == 'Tierra' && ataquerival == 'Fuego')
-        {
-            crearmensaje('Ganaste')
-            vidasrival--
-            spanvidasrival.innerHTML = vidasrival
+        for (let index = 0; index < ataquejugador.length; index++) {
+            if(ataquejugador[index] === ataquerival[index]){
+                indexambosoponentes(index,index)
+                crearmensaje('Empate')
+
+            } else if( ataquejugador[index] === 'Agua' && (ataquerival[index]=== 'Fuego' || ataquerival[index] === 'Tierra') 
+                    || ataquejugador[index] === 'Fuego'&& ataquerival[index] === 'Planta'
+                    || ataquejugador[index] === 'Planta' && (ataquerival[index] === 'Agua' || ataquerival[index] === 'Tierra')
+                    || ataquejugador[index] === 'Tierra' && ataquerival[index] === 'Fuego'){
+                indexambosoponentes(index,index)
+                crearmensaje('Ganaste')
+                victoriasjugador++
+                spanvidajugador.innerHTML = victoriasjugador    
         }  else {
+            indexambosoponentes(index,index)
             crearmensaje('Perdiste')
-            vidasjugador--
-            spanvidajugador.innerHTML = vidasjugador
+            victoriasrival++
+            spanvidasrival.innerHTML = victoriasrival
         }
 
         revisarvidas()
     }
+}  
 
     function revisarvidas(){
-        if(vidasjugador == 0){
-            crearmensajefinal('NO TE QUEDAN MÁS POKÉMON, HAS PERDIDO 😭')
-        } else if(vidasrival == 0){
+        if(victoriasjugador == victoriasrival){
+            crearmensajefinal('WOWWWW ES UN EMPATE 🌚')
+        } else if(victoriasjugador > victoriasrival){
             crearmensajefinal('NO LE QUEDAN MÁS POKÉMON A TU RIVAL. FELICITACIONES! GANASTE 🥳')
+        } else {
+            crearmensajefinal('NO TE QUEDAN MÁS POKÉMON, HAS PERDIDO 😭')
         }
     }
 
@@ -292,8 +321,8 @@
         let nuevoataquerival = document.createElement('p')
 
         sectionmensajes.innerHTML = resultado
-        nuevoataquejugador.innerHTML = ataquejugador
-        nuevoataquerival.innerHTML = ataquerival
+        nuevoataquejugador.innerHTML = indexataquejugador
+        nuevoataquerival.innerHTML = indexataquerival
 
         //anterior: let parrafo = document.createElement('p')
         //anterior: parrafo.innerHTML = 'Haz enviado un Pokémon tipo ' + ataquejugador + ', Tu rival envió un Pokémon tipo ' + ataquerival + ' - ' + resultado
@@ -306,11 +335,6 @@
 
         sectionmensajes.innerHTML = resultadofinal
         sectionreset.style.display = 'block'
-        botonMascota.disabled = true
-        botonagua.disabled = true
-        botonfuego.disabled = true
-        botonplanta.disabled = true
-        botontierra.disabled = true
     }
 
     function resetjuego(){
